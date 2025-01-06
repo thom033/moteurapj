@@ -1,0 +1,17 @@
+<project name="deploy-ejb" default="deploy" basedir=".">
+    <property name="projects_lib" value="/home/tahina/git/gestion-station/gestion-station/build-file/lib" />
+   
+    <target name="deploy">
+        <taskdef name="for" classname="net.sf.antcontrib.logic.For" classpath="${basedir}/lib/ant-contrib-0.6.jar" />
+        <for param="direct" list="${projects_lib}" delimiter=";">
+            <sequential>
+                <copy todir="@{direct}">
+                    <fileset dir="lib" includes="*.jar" excludes="ant-contrib-0.6.jar"/>
+                </copy>
+                <copy todir="@{direct}">
+                    <fileset dir="build-file/ear" includes="*.jar" />
+                </copy>
+            </sequential>
+        </for>
+    </target>
+</project>
